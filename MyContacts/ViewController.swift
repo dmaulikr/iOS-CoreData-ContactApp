@@ -7,10 +7,13 @@
 //
 
 import UIKit
+import CoreData
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate {
     
     var cellId = "contactCell"
+    
+    let controller: NSFetchedResultsController<Contact>!
     
     @IBOutlet weak var contactTableView: UITableView!
 
@@ -34,6 +37,20 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             return cell
         }else{
             return UITableViewCell()
+        }
+    }
+    
+    func fetchResult(){
+        let request: NSFetchRequest<Contact> = Contact.fetchRequest()
+        let nameSort = NSSortDescriptor(key: "name", ascending: true)
+        request.sortDescriptors = [nameSort]
+        let _controller = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+        
+        do{
+            try _controller.performFetch()
+        }catch{
+            let error = error as NSError
+            print("\(error)")
         }
     }
     
