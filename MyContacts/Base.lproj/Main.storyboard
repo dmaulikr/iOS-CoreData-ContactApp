@@ -76,7 +76,10 @@
                                         </tableViewCellContentView>
                                         <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
                                         <connections>
+                                            <outlet property="contactEmailLabel" destination="gmC-id-XT6" id="76O-jc-XrL"/>
                                             <outlet property="contactImage" destination="FWb-Pd-MEb" id="W27-B3-yCg"/>
+                                            <outlet property="contactNameLabel" destination="vlD-hl-1Xb" id="J8b-BN-2uo"/>
+                                            <outlet property="contactPhoneLabel" destination="Paq-cQ-Vw7" id="LSS-GZ-7i3"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

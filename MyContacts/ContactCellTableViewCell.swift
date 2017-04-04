@@ -11,5 +11,8 @@ import UIKit
 class ContactCellTableViewCell: UITableViewCell {
 
     @IBOutlet weak var contactImage: UIImageView!
+    @IBOutlet weak var contactNameLabel: UILabel!
+    @IBOutlet weak var contactPhoneLabel: UILabel!
+    @IBOutlet weak var contactEmailLabel: UILabel!
     
 }
