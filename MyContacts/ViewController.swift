@@ -23,6 +23,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         contactTableView.delegate = self
         contactTableView.dataSource = self
         
+        //seedDb()
+        
         fetchResult()
     }
     
@@ -43,11 +45,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        if let cell = tableView.dequeueReusableCell(withIdentifier: cellId) as? ContactCellTableViewCell{
-//            return cell
-//        }else{
-//            return UITableViewCell()
-//        }
         
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! ContactCellTableViewCell
         configureCell(cell: cell, indexPath: indexPath as NSIndexPath)
@@ -86,6 +83,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         switch type {
+            
         case .insert:
             if let indexPath = newIndexPath {
                 contactTableView.insertRows(at: [indexPath], with: .fade)
@@ -114,6 +112,26 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             }
             break
         }
+    }
+    
+    func seedDb(){
+        let contact1 = Contact(context: context)
+        contact1.name = "Kodjovi Toguin"
+        contact1.phone = "90 833 94"
+        contact1.email = "kodjo@tg.tg"
+        
+        let contact2 = Contact(context: context)
+        contact2.name = "Ancien Yawo"
+        contact2.phone = "90 847 94"
+        contact2.email = "ancien@tg.tg"
+        
+        let contact3 = Contact(context: context)
+        contact3.name = "Toto Gowu Donut"
+        contact3.phone = "90 847 00"
+        contact3.email = "magic@tg.tg"
+        
+        ad.saveContext()
+        
     }
     
 
