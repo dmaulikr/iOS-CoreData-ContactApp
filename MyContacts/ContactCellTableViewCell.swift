@@ -15,4 +15,10 @@ class ContactCellTableViewCell: UITableViewCell {
     @IBOutlet weak var contactPhoneLabel: UILabel!
     @IBOutlet weak var contactEmailLabel: UILabel!
     
+    
+    func configureCell(contact: Contact){
+        contactNameLabel.text = contact.name
+        contactPhoneLabel.text = contact.phone
+        contactEmailLabel.text = contact.email
+    }
 }

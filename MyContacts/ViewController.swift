@@ -13,7 +13,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     var cellId = "contactCell"
     
-    let controller: NSFetchedResultsController<Contact>!
+    var controller: NSFetchedResultsController<Contact>!
     
     @IBOutlet weak var contactTableView: UITableView!
 
@@ -22,22 +22,50 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         // Do any additional setup after loading the view, typically from a nib.
         contactTableView.delegate = self
         contactTableView.dataSource = self
+        
+        fetchResult()
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        if let sections = controller.sections{
+            return sections.count
+        }
+        return 0
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 6
+        if let sections = controller.sections{
+            let sectionInfo = sections[section]
+            return sectionInfo.numberOfObjects
+        }
+        
+        return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: cellId) as? ContactCellTableViewCell{
-            return cell
-        }else{
-            return UITableViewCell()
-        }
+//        if let cell = tableView.dequeueReusableCell(withIdentifier: cellId) as? ContactCellTableViewCell{
+//            return cell
+//        }else{
+//            return UITableViewCell()
+//        }
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! ContactCellTableViewCell
+        configureCell(cell: cell, indexPath: indexPath as NSIndexPath)
+        
+        return cell
+    }
+    
+    func configureCell(cell: ContactCellTableViewCell, indexPath: NSIndexPath){
+        let contact = controller.object(at: indexPath as IndexPath)
+        cell.configureCell(contact: contact)
+    }
+    
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        contactTableView.beginUpdates()
+    }
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        contactTableView.endUpdates()
     }
     
     func fetchResult(){
@@ -46,11 +74,45 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         request.sortDescriptors = [nameSort]
         let _controller = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
         
+        self.controller = _controller
+        
         do{
             try _controller.performFetch()
         }catch{
             let error = error as NSError
             print("\(error)")
+        }
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        switch type {
+        case .insert:
+            if let indexPath = newIndexPath {
+                contactTableView.insertRows(at: [indexPath], with: .fade)
+            }
+            break
+        
+        case .delete:
+            if let indexPath = indexPath {
+                contactTableView.deleteRows(at: [indexPath], with: .fade)
+            }
+            break
+            
+        case .update:
+            if let indexPath = indexPath{
+                let cell = contactTableView.cellForRow(at: indexPath) as! ContactCellTableViewCell
+                configureCell(cell: cell, indexPath: indexPath as NSIndexPath)
+            }
+            break
+            
+        case .move:
+            if let indexPath = indexPath{
+                contactTableView.deleteRows(at: [indexPath], with: .fade)
+            }
+            if let indexPath = newIndexPath{
+                contactTableView.insertRows(at: [indexPath], with: .fade)
+            }
+            break
         }
     }
     
