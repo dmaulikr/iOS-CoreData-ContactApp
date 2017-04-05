@@ -98,12 +98,13 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="qkd-Ns-fxR">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
-                                <segue destination="EfW-RB-sxz" kind="show" id="MQP-OA-RLR"/>
+                                <segue destination="EfW-RB-sxz" kind="show" identifier="ContactDetailsNew" id="MQP-OA-RLR"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="contactTableView" destination="cT8-eQ-n2r" id="9wW-Ic-yp6"/>
+                        <segue destination="EfW-RB-sxz" kind="show" identifier="ContactDetails" id="5jg-GP-syI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -170,8 +171,18 @@
                     <navigationItem key="navigationItem" title="Add or Edit Contact" id="rFV-i9-vtX">
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="8bX-fI-Veg">
                             <color key="tintColor" red="0.99226838350296021" green="0.9961274266242981" blue="0.99599415063858032" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="saveContact:" destination="EfW-RB-sxz" id="3Du-LN-WYV"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="contactImageView" destination="lGZ-S9-xaE" id="3zd-O1-SOh"/>
+                        <outlet property="emailTxt" destination="yCp-F3-9yI" id="Xe0-bi-EQK"/>
+                        <outlet property="nameTxt" destination="vyO-5N-40F" id="lgN-Jb-mkc"/>
+                        <outlet property="phoneTxt" destination="QAT-fx-lBj" id="i93-Ca-KSi"/>
+                        <outlet property="typePicker" destination="5nS-WB-rwl" id="7Va-GO-Cp7"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FQE-2L-Epz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -182,9 +193,10 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="7xk-L4-76k" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="kCI-lw-qEd">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="kCI-lw-qEd">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="barTintColor" red="1" green="0.45263739219999999" blue="0.2954201467" alpha="1" colorSpace="calibratedRGB"/>
                         <textAttributes key="titleTextAttributes">
                             <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
@@ -205,4 +217,7 @@
     <resources>
         <image name="cell" width="140" height="142"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="5jg-GP-syI"/>
+    </inferredMetricsTieBreakers>
 </document>
