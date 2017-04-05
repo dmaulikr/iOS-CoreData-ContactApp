@@ -24,6 +24,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         contactTableView.dataSource = self
         
         //seedDb()
+        //seedContactType()
         
         fetchResult()
     }
@@ -132,6 +133,22 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         ad.saveContext()
         
+    }
+    
+    func seedContactType(){
+        let type1 = ContactType(context: context)
+        type1.type = "Familly"
+        
+        let type2 = ContactType(context: context)
+        type2.type = "Friends"
+        
+        let type3 = ContactType(context: context)
+        type3.type = "Work"
+        
+        let type4 = ContactType(context: context)
+        type4.type = "Sport Club"
+        
+        ad.saveContext()
     }
     
 

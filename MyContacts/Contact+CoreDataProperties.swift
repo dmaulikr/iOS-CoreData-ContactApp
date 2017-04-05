@@ -18,7 +18,6 @@ extension Contact {
 
     @NSManaged public var name: String?
     @NSManaged public var phone: String?
-    @NSManaged public var work: String?
     @NSManaged public var email: String?
     @NSManaged public var image: NSObject?
     @NSManaged public var toType: ContactType?
