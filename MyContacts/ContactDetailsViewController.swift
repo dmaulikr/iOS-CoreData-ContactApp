@@ -47,7 +47,24 @@ class ContactDetailsViewController: UIViewController, UIPickerViewDataSource, UI
     }
     
     @IBAction func saveContact(_ sender: UIBarButtonItem){
-        print("SAVING ITEM")
+        
+        let contact = Contact(context: context)
+        
+        if let name = nameTxt.text{
+            contact.name = name
+        }
+        if let email = emailTxt.text{
+            contact.email = email
+        }
+        if let phone = phoneTxt.text{
+            contact.phone = phone
+        }
+        
+        contact.toType = types[typePicker.selectedRow(inComponent: 0)]
+        
+        ad.saveContext()
+        
+        _ = navigationController?.popViewController(animated: true)
     }
     
     func fetchContactTypes(){

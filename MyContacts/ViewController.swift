@@ -72,6 +72,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         request.sortDescriptors = [nameSort]
         let _controller = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
         
+        //Set Delegate to listen to changings
+        _controller.delegate = self
+        
         self.controller = _controller
         
         do{
