@@ -20,6 +20,8 @@ class ContactDetailsViewController: UIViewController, UIPickerViewDataSource, UI
     
     var types = [ContactType]()
     
+    var selectedContact: Contact?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -30,6 +32,10 @@ class ContactDetailsViewController: UIViewController, UIPickerViewDataSource, UI
 
         if let topItem = self.navigationController?.navigationBar.topItem{
             topItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        }
+        
+        if selectedContact != nil{
+            loadSelectedContact()
         }
     }
     
@@ -48,7 +54,14 @@ class ContactDetailsViewController: UIViewController, UIPickerViewDataSource, UI
     
     @IBAction func saveContact(_ sender: UIBarButtonItem){
         
-        let contact = Contact(context: context)
+        var contact: Contact!
+        
+        if selectedContact == nil{
+            contact = Contact(context: context)
+        }else{
+            contact = selectedContact
+        }
+        
         
         if let name = nameTxt.text{
             contact.name = name
@@ -67,6 +80,14 @@ class ContactDetailsViewController: UIViewController, UIPickerViewDataSource, UI
         _ = navigationController?.popViewController(animated: true)
     }
     
+    @IBAction func deleteContact(_ sender: UIButton) {
+        if selectedContact != nil{
+            context.delete(selectedContact!)
+            ad.saveContext()
+        }
+        _ = navigationController?.popViewController(animated: true)
+    }
+    
     func fetchContactTypes(){
         let request:  NSFetchRequest<ContactType> = ContactType.fetchRequest()
         
@@ -75,6 +96,29 @@ class ContactDetailsViewController: UIViewController, UIPickerViewDataSource, UI
         }catch{
             //Error handling
             print("An Error occured during operation!")
+        }
+    }
+    
+    func loadSelectedContact(){
+        if let contact = selectedContact{
+            
+            nameTxt.text = contact.name
+            emailTxt.text = contact.email
+            phoneTxt.text = contact.phone
+            
+            if let _type = contact.toType{
+                var i = 0
+                repeat{
+                    
+                    let tmpType = types[i]
+                    if tmpType.type == _type.type{
+                        typePicker.selectRow(i, inComponent: 0, animated: false)
+                        break
+                    }
+                    i += 1
+                    
+                }while(i < types.count)
+            }
         }
     }
 }

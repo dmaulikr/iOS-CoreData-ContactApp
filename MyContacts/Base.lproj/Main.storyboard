@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="7xk-L4-76k">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1421" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="7xk-L4-76k">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -157,14 +157,31 @@
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5nS-WB-rwl">
                                 <rect key="frame" x="8" y="222" width="359" height="216"/>
                             </pickerView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jce-7T-SeB">
+                                <rect key="frame" x="106" y="605" width="163" height="54"/>
+                                <color key="backgroundColor" red="1" green="0.1118306135" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="163" id="WAh-mo-J4b"/>
+                                    <constraint firstAttribute="height" constant="54" id="Weo-Cf-rve"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="20"/>
+                                <state key="normal" title="Delete">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="deleteContact:" destination="EfW-RB-sxz" eventType="touchUpInside" id="0vR-mJ-pts"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="5nS-WB-rwl" firstAttribute="leading" secondItem="Yfc-kD-3jf" secondAttribute="leading" constant="8" id="Gmg-uA-GSJ"/>
                             <constraint firstItem="nbu-5c-Wwl" firstAttribute="leading" secondItem="Yfc-kD-3jf" secondAttribute="leading" constant="8" id="O7c-Fp-492"/>
                             <constraint firstItem="nbu-5c-Wwl" firstAttribute="top" secondItem="hpe-s1-NRe" secondAttribute="bottom" constant="8" id="UqA-LY-eLc"/>
+                            <constraint firstItem="Jce-7T-SeB" firstAttribute="centerX" secondItem="Yfc-kD-3jf" secondAttribute="centerX" id="aAe-Tf-E63"/>
                             <constraint firstAttribute="trailing" secondItem="nbu-5c-Wwl" secondAttribute="trailing" constant="8" id="gJx-5k-dQp"/>
                             <constraint firstAttribute="trailing" secondItem="5nS-WB-rwl" secondAttribute="trailing" constant="8" id="kuv-Ay-EZf"/>
+                            <constraint firstItem="Udh-Iz-nfb" firstAttribute="top" secondItem="Jce-7T-SeB" secondAttribute="bottom" constant="8" id="pTL-kt-f3J"/>
                             <constraint firstItem="5nS-WB-rwl" firstAttribute="top" secondItem="nbu-5c-Wwl" secondAttribute="bottom" constant="8" id="utJ-Rm-aAc"/>
                         </constraints>
                     </view>
@@ -193,7 +210,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="7xk-L4-76k" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="kCI-lw-qEd">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="kCI-lw-qEd">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>

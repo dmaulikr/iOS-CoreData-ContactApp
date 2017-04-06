@@ -12,6 +12,7 @@ import CoreData
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate {
     
     var cellId = "contactCell"
+    var detailsVCId = "ContactDetails"
     
     var controller: NSFetchedResultsController<Contact>!
     
@@ -56,6 +57,24 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func configureCell(cell: ContactCellTableViewCell, indexPath: NSIndexPath){
         let contact = controller.object(at: indexPath as IndexPath)
         cell.configureCell(contact: contact)
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let results = controller.fetchedObjects, results.count > 0{
+            
+            let contact = results[indexPath.row]
+            performSegue(withIdentifier: detailsVCId, sender: contact)
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == detailsVCId{
+            if let destination = segue.destination as? ContactDetailsViewController{
+                if let contact = sender as? Contact{
+                    destination.selectedContact = contact
+                }
+            }
+        }
     }
     
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
