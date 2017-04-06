@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class ContactDetailsViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
+class ContactDetailsViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     
     @IBOutlet weak var typePicker: UIPickerView!
@@ -17,6 +17,8 @@ class ContactDetailsViewController: UIViewController, UIPickerViewDataSource, UI
     @IBOutlet weak var emailTxt: UITextField!
     @IBOutlet weak var phoneTxt: UITextField!
     @IBOutlet weak var contactImageView: UIImageView!
+    
+    var imagePicker: UIImagePickerController!
     
     var types = [ContactType]()
     
@@ -29,6 +31,8 @@ class ContactDetailsViewController: UIViewController, UIPickerViewDataSource, UI
         
         typePicker.dataSource = self
         typePicker.delegate = self
+        imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
 
         if let topItem = self.navigationController?.navigationBar.topItem{
             topItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
@@ -62,6 +66,7 @@ class ContactDetailsViewController: UIViewController, UIPickerViewDataSource, UI
             contact = selectedContact
         }
         
+        contact.image = contactImageView.image
         
         if let name = nameTxt.text{
             contact.name = name
@@ -99,9 +104,21 @@ class ContactDetailsViewController: UIViewController, UIPickerViewDataSource, UI
         }
     }
     
+    @IBAction func openImagePicker(_ sender: UIButton) {
+        present(imagePicker, animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage{
+            contactImageView.image = image
+        }
+        imagePicker.dismiss(animated: true, completion: nil)
+    }
+    
     func loadSelectedContact(){
         if let contact = selectedContact{
             
+            contactImageView.image = contact.image as? UIImage
             nameTxt.text = contact.name
             emailTxt.text = contact.email
             phoneTxt.text = contact.phone

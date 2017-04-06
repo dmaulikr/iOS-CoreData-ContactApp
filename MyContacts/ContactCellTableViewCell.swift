@@ -20,5 +20,6 @@ class ContactCellTableViewCell: UITableViewCell {
         contactNameLabel.text = contact.name
         contactPhoneLabel.text = contact.phone
         contactEmailLabel.text = contact.email
+        contactImage.image = contact.image as? UIImage
     }
 }

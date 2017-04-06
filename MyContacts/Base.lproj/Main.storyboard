@@ -128,6 +128,12 @@
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cell" translatesAutoresizingMaskIntoConstraints="NO" id="lGZ-S9-xaE">
                                         <rect key="frame" x="0.0" y="0.0" width="140" height="142"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="140" id="MhR-2I-G1k"/>
+                                            <constraint firstAttribute="height" constant="142" id="O0j-3O-zGU"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="142" id="xxb-Bv-C5K"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="140" id="yXd-yC-G9H"/>
+                                        </constraints>
                                     </imageView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="wHo-8T-UyG">
                                         <rect key="frame" x="150" y="0.0" width="209" height="142"/>
@@ -172,6 +178,20 @@
                                     <action selector="deleteContact:" destination="EfW-RB-sxz" eventType="touchUpInside" id="0vR-mJ-pts"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rse-Po-toN">
+                                <rect key="frame" x="7" y="73" width="141" height="141"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="141" id="2mf-49-gTI"/>
+                                    <constraint firstAttribute="width" constant="141" id="Jez-Jz-Xo2"/>
+                                </constraints>
+                                <state key="normal">
+                                    <color key="titleColor" red="0.99226838350296021" green="0.9961274266242981" blue="0.99599415063858032" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="openImagePicker:" destination="EfW-RB-sxz" eventType="touchUpInside" id="kdZ-2g-kmI"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -179,7 +199,9 @@
                             <constraint firstItem="nbu-5c-Wwl" firstAttribute="leading" secondItem="Yfc-kD-3jf" secondAttribute="leading" constant="8" id="O7c-Fp-492"/>
                             <constraint firstItem="nbu-5c-Wwl" firstAttribute="top" secondItem="hpe-s1-NRe" secondAttribute="bottom" constant="8" id="UqA-LY-eLc"/>
                             <constraint firstItem="Jce-7T-SeB" firstAttribute="centerX" secondItem="Yfc-kD-3jf" secondAttribute="centerX" id="aAe-Tf-E63"/>
+                            <constraint firstItem="Rse-Po-toN" firstAttribute="centerY" secondItem="lGZ-S9-xaE" secondAttribute="centerY" id="eP1-he-oZO"/>
                             <constraint firstAttribute="trailing" secondItem="nbu-5c-Wwl" secondAttribute="trailing" constant="8" id="gJx-5k-dQp"/>
+                            <constraint firstItem="Rse-Po-toN" firstAttribute="centerX" secondItem="lGZ-S9-xaE" secondAttribute="centerX" id="iJ6-sd-ssR"/>
                             <constraint firstAttribute="trailing" secondItem="5nS-WB-rwl" secondAttribute="trailing" constant="8" id="kuv-Ay-EZf"/>
                             <constraint firstItem="Udh-Iz-nfb" firstAttribute="top" secondItem="Jce-7T-SeB" secondAttribute="bottom" constant="8" id="pTL-kt-f3J"/>
                             <constraint firstItem="5nS-WB-rwl" firstAttribute="top" secondItem="nbu-5c-Wwl" secondAttribute="bottom" constant="8" id="utJ-Rm-aAc"/>
