@@ -11,7 +11,10 @@ import CoreData
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate {
     
+    
+    //Reusable Cell ID
     var cellId = "contactCell"
+    //Contact Details View Controller Segue
     var detailsVCId = "ContactDetails"
     
     var controller: NSFetchedResultsController<Contact>!
@@ -24,12 +27,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         contactTableView.delegate = self
         contactTableView.dataSource = self
         
-        //seedDb()
         //seedContactType()
+        //seedDb()
         
         fetchResult()
     }
     
+    //Number of Sections in Table
     func numberOfSections(in tableView: UITableView) -> Int {
         if let sections = controller.sections{
             return sections.count
@@ -37,6 +41,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return 0
     }
     
+    //Number of Row in Sections
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let sections = controller.sections{
             let sectionInfo = sections[section]
@@ -46,6 +51,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return 0
     }
     
+    //Configure Table cell
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! ContactCellTableViewCell
@@ -59,6 +65,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         cell.configureCell(contact: contact)
     }
     
+    //Function onSelectRow
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let results = controller.fetchedObjects, results.count > 0{
             
@@ -67,6 +74,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
     }
     
+    //Open Contact Details VC on Contact Select
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == detailsVCId{
             if let destination = segue.destination as? ContactDetailsViewController{
@@ -77,6 +85,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
     }
     
+    //Func on NSFetchedResultsController content change
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         contactTableView.beginUpdates()
     }
@@ -85,6 +94,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         contactTableView.endUpdates()
     }
     
+    //Fetching the results
     func fetchResult(){
         let request: NSFetchRequest<Contact> = Contact.fetchRequest()
         let nameSort = NSSortDescriptor(key: "name", ascending: true)
@@ -104,6 +114,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
     }
     
+    
+    //Func to update the TableView on Object change
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         switch type {
             
@@ -137,6 +149,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
     }
     
+    
+    //Func to seed the DB with some Contact Values
     func seedDb(){
         let contact1 = Contact(context: context)
         contact1.name = "Kodjovi Toguin"
@@ -157,6 +171,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
     }
     
+    //Func to seed the DB with Contact Type values
     func seedContactType(){
         let type1 = ContactType(context: context)
         type1.type = "Familly"

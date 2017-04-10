@@ -43,19 +43,23 @@ class ContactDetailsViewController: UIViewController, UIPickerViewDataSource, UI
         }
     }
     
+    //Number of Component in PickerView
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
     
+    //Number of row in PickerView Component
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return types.count
     }
     
+    //Title for Row
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         let type = types[row]
         return type.type
     }
     
+    //Func to save/Edit Contact
     @IBAction func saveContact(_ sender: UIBarButtonItem){
         
         var contact: Contact!
@@ -85,6 +89,7 @@ class ContactDetailsViewController: UIViewController, UIPickerViewDataSource, UI
         _ = navigationController?.popViewController(animated: true)
     }
     
+    //Func to Delete Contact
     @IBAction func deleteContact(_ sender: UIButton) {
         if selectedContact != nil{
             context.delete(selectedContact!)
@@ -93,6 +98,7 @@ class ContactDetailsViewController: UIViewController, UIPickerViewDataSource, UI
         _ = navigationController?.popViewController(animated: true)
     }
     
+    //Func to fetch contact types for PickerView
     func fetchContactTypes(){
         let request:  NSFetchRequest<ContactType> = ContactType.fetchRequest()
         
@@ -104,10 +110,12 @@ class ContactDetailsViewController: UIViewController, UIPickerViewDataSource, UI
         }
     }
     
+    //Open ImagePicker for contact image
     @IBAction func openImagePicker(_ sender: UIButton) {
         present(imagePicker, animated: true, completion: nil)
     }
     
+    //Func on picture selected
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage{
             contactImageView.image = image
@@ -115,6 +123,7 @@ class ContactDetailsViewController: UIViewController, UIPickerViewDataSource, UI
         imagePicker.dismiss(animated: true, completion: nil)
     }
     
+    //Load selected Contact from TableView
     func loadSelectedContact(){
         if let contact = selectedContact{
             

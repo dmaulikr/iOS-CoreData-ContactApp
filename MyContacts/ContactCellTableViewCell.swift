@@ -16,6 +16,7 @@ class ContactCellTableViewCell: UITableViewCell {
     @IBOutlet weak var contactEmailLabel: UILabel!
     
     
+    //Set values to the UI Components
     func configureCell(contact: Contact){
         contactNameLabel.text = contact.name
         contactPhoneLabel.text = contact.phone
